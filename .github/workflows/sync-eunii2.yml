@@ -19,21 +19,23 @@ jobs:
         with:
           python-version: '3.12'
 
+      # OpenSSL 설치
+      - name: Install OpenSSL
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openssl
+
       # SSH_PRIVATE_KEY 디버그 (Secrets 제대로 로드되었는지 확인)
       - name: Debug SSH_PRIVATE_KEY
         run: echo "${{ secrets.SSH_PRIVATE_KEY }}" | head -c 10
 
-      # SSH 설정 추가
+      # SSH 설정 및 에이전트 실행
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
-
-      # SSH 에이전트 실행 및 SSH 키 추가
-      - name: Start SSH agent
-        run: |
           eval $(ssh-agent -s)
           ssh-add ~/.ssh/id_rsa
 
