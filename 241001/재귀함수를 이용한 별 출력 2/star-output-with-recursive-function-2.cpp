@@ -14,18 +14,6 @@ void printStarsDescending(int n) {
 
 void printStarsAscending(int n) {
     if (n <= 0) return;
-        cout << "* ";
-    \}
-    cout << '\\n';
-\}
-
-int main() {
-    int n;
-    cin >> n;
-
-    printStarsDescending(n);
-
-$0
 
     printStarsAscending(n - 1);
 
