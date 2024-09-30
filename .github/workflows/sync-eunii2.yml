@@ -12,38 +12,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      # SSH_PRIVATE_KEY_BASE64 디버깅 (Secrets 제대로 로드되었는지 확인)
-      - name: Debug SSH_PRIVATE_KEY
-        run: echo "${{ secrets.SSH_PRIVATE_KEY_BASE64 }}" | head -c 20
-
-      # SSH 키 Base64 디코딩 및 설정
-      - name: Decode and set up SSH key
+      # SSH 키 설정 및 연결 설정
+      - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY_BASE64 }}" | base64 -d > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
-
-      # SSH 에이전트 실행 및 SSH 키 추가
-      - name: Start SSH agent
-        run: |
           eval $(ssh-agent -s)
           ssh-add ~/.ssh/id_rsa
 
-      # SSH 연결 테스트
-      - name: Test SSH connection
-        run: ssh -T git@github.com || true
-
-      # Git 설정
-      - name: Configure git
+      # Git 설정 - eunii2로 커밋을 표시
+      - name: Configure git for eunii2
         run: |
-          git config --global user.name "eunii3"
-          git config --global user.email "rose021223@chungbuk.ac.kr"
+          git config --global user.name "eunii2"
+          git config --global user.email "eunii2@example.com"
 
       # 원격 저장소 추가 및 변경사항 푸시 (eunii3의 내용으로 덮어쓰기)
       - name: Add eunii2 remote and push changes
