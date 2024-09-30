@@ -24,6 +24,9 @@ jobs:
           git config --global user.name "eunii3"
           git config --global user.email "rose021223@chungbuk.ac.kr"
 
+      - name: Check environment variable
+        run: echo ${{ secrets.EUNII2_PAT }}
+
       - name: Add eunii2 remote and push changes
         run: |
           git remote add eunii2 https://eunii2:${{ secrets.EUNII2_PAT }}@github.com/eunii2/codetree-TILs.git
