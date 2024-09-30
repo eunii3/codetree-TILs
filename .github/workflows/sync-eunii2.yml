@@ -19,13 +19,18 @@ jobs:
         with:
           python-version: '3.12'
 
+      # SSH 설정 추가
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
       - name: Configure git
         run: |
           git config --global user.name "eunii3"
           git config --global user.email "rose021223@chungbuk.ac.kr"
-
-      - name: Check environment variable
-        run: echo ${{ secrets.EUNII2_PAT }}
 
       - name: Add eunii2 remote and push changes
         run: |
