@@ -1,4 +1,5 @@
 #include <iostream>
+
 using namespace std;
 
 int main() {
@@ -18,7 +19,7 @@ int main() {
         big = a;
     }
 
-    cout << small + 10 << " " << big * 2;
+    cout << small + 10 << " " << big * 2 << "\n";
 
     return 0;
 }
