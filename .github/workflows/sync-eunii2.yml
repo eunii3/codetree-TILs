@@ -15,7 +15,7 @@ jobs:
           repository: eunii3/codetree-TILs  # eunii3 레포지토리를 명시적으로 체크아웃
           token: ${{ secrets.GITHUB_TOKEN }}  # 자동으로 생성된 GITHUB_TOKEN 사용
 
-      # SSH 키 설정 및 디버깅
+      # SSH 키 설정
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
@@ -39,6 +39,6 @@ jobs:
       - name: Add eunii2 remote and push changes
         run: |
           git remote add eunii2 git@github.com:eunii2/codetree-TILs.git
-          git fetch eunii3
+          git fetch eunii2  # eunii2에서 변경사항 가져오기
           git reset --hard eunii3/main  # eunii3의 내용을 덮어씌우기
           git push eunii2 main --force-with-lease  # eunii2로 강제 푸시
