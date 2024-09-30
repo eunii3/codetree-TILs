@@ -8,21 +8,22 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE20: true
     steps:
       - name: Checkout eunii3 repo
         uses: actions/checkout@v3
-        with:
-          repository: eunii3/codetree-TILs
-          ref: main
 
-      - name: Sync with eunii2
+      - name: Configure git
         run: |
           git config --global user.name "eunii3"
           git config --global user.email "rose021223@chungbuk.ac.kr"
+
+      - name: Add eunii2 remote and push changes
+        run: |
           git remote add eunii2 https://github.com/eunii2/codetree-TILs.git
           git fetch eunii2
-          git merge --no-ff eunii2/main
+          git merge --no-ff eunii2/main || true
           git push eunii2 main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
