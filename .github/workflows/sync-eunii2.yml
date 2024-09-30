@@ -45,10 +45,10 @@ jobs:
           git config --global user.name "eunii3"
           git config --global user.email "rose021223@chungbuk.ac.kr"
 
-      # 원격 저장소 추가 및 변경사항 푸시
+      # 원격 저장소 추가 및 변경사항 푸시 (eunii3의 내용으로 덮어쓰기)
       - name: Add eunii2 remote and push changes
         run: |
           git remote add eunii2 git@github.com:eunii2/codetree-TILs.git
-          git fetch eunii2
-          git merge --no-ff --allow-unrelated-histories eunii2/main || true
-          git push eunii2 main
+          git fetch eunii3
+          git reset --hard eunii3/main  # eunii3의 내용을 덮어씌우기
+          git push eunii2 main --force-with-lease  # eunii2로 강제 푸시
