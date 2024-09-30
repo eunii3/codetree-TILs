@@ -30,6 +30,14 @@ jobs:
       - name: Test SSH connection
         run: ssh -T git@github.com || true
 
+      - name: Debug SSH_PRIVATE_KEY
+        run: echo "${{ secrets.SSH_PRIVATE_KEY }}" | head -c 10
+
+      - name: Start SSH agent
+        run: |
+          eval $(ssh-agent -s)
+          ssh-add ~/.ssh/id_rsa
+
       - name: Configure git
         run: |
           git config --global user.name "eunii3"
