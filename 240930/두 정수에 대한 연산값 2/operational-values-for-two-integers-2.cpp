@@ -7,19 +7,18 @@ int main() {
     cin.tie(nullptr);
     cout.tie(nullptr);
 
-    int a, b, small, big;
+    int a, b;
     cin >> a >> b;
 
     if(a<b){
-        small = a;
-        big = b;
-
+        a = a + 10;
+        b = b * 2;
     }else{
-        small = b;
-        big = a;
+        a = a * 2;
+        b = b + 10;
     }
 
-    cout << small + 10 << " " << big * 2 << "\n";
+    cout << a << " " << b << "\n";
 
     return 0;
 }
