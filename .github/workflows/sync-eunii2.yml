@@ -33,5 +33,3 @@ jobs:
           git fetch eunii2
           git merge --no-ff --allow-unrelated-histories eunii2/main || true
           git push eunii2 main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
