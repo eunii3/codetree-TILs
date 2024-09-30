@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout eunii3 repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: eunii3/codetree-TILs
           ref: main
@@ -18,7 +18,7 @@ jobs:
       - name: Sync with eunii2
         run: |
           git config --global user.name "eunii3"
-          git config --global user.email "eunii3@example.com"
+          git config --global user.email "rose021223@chungbuk.ac.kr"
           git remote add eunii2 https://github.com/eunii2/codetree-TILs.git
           git fetch eunii2
           git merge --no-ff eunii2/main
