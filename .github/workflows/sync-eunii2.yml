@@ -11,8 +11,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          repository: eunii3/codetree-TILs  # eunii3 레포지토리를 명시적으로 체크아웃
 
-      # SSH 키 설정 및 연결 설정
+      # SSH 키 설정 및 디버깅
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
@@ -22,11 +24,15 @@ jobs:
           eval $(ssh-agent -s)
           ssh-add ~/.ssh/id_rsa
 
+      # SSH 연결 테스트
+      - name: Test SSH connection
+        run: ssh -T git@github.com || true
+
       # Git 설정 - eunii2로 커밋을 표시
       - name: Configure git for eunii2
         run: |
           git config --global user.name "eunii2"
-          git config --global user.email "eunii2@example.com"
+          git config --global user.email "chb7562@gmail.com"
 
       # 원격 저장소 추가 및 변경사항 푸시 (eunii3의 내용으로 덮어쓰기)
       - name: Add eunii2 remote and push changes
